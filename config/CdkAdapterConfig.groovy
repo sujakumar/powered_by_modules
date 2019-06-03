@@ -11,6 +11,11 @@ dbs {
 			cdk_deal
 			dealership
 			extraction_log
+            rooftop
+            product_code_mapping {
+				customId = "(CONCAT(dealership, "||", external_code, "||", product_code))"
+			}
+            we_owe
 
 		}
 		postSql = [
