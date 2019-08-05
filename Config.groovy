@@ -4,6 +4,12 @@ proconCoreDb {
     url         = 'jdbc:mysql://amesnapshot01.i.spireon.com/proconCore_production?zeroDateTimeBehavior=convertToNull&connectTimeout=30000&socketTimeout=60000&autoReconnect=true&allowMultiQueries=true'
 }
 
+shopbertDb {
+    username    = '$extract_username'
+    password    = '''$some_pwd'''
+    url         = 'jdbc:mysql://amesnapshot01.i.spireon.com/shopbert_production?zeroDateTimeBehavior=convertToNull&connectTimeout=30000&socketTimeout=60000&autoReconnect=true&allowMultiQueries=true'
+}
+
 automotiveServicesDb {
     username    = '$extract_username'
     password    = '''$some_pwd'''
