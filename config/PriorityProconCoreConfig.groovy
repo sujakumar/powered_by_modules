@@ -36,7 +36,7 @@ dbs {
 			}
 			universe
 			landmark
-
+			data_service_map
 		}
 		postSql = [
 			"call PROD_NSPIRE.PROCON_CORE.POST_PROCESS();",
