@@ -10,6 +10,7 @@ dbs {
 
         // tables to extract
         tables {
+            data_service_map
             device_battery_type
             asset_attribute
             asset_type
