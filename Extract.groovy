@@ -137,7 +137,9 @@ File extractIds(scratchDir, sqlConn, database, table, customId){
     def file = new File(scratchDir, "${table}_ids.csv.gz".toString())
     def etl_id = customId ?: "id"
 
-    def selectIds = "select $etl_id etl_id from ${table} where $etl_id is not null;"
+    def selectIds = """
+            select $etl_id etl_id from ${table} where $etl_id is not null;
+    """
     println(selectIds)
     sqlConn?.execute("set transaction isolation level read uncommitted".toString())
 
@@ -365,7 +367,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
     def schema          = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, sourceDatabase)
     def tempIngestTable = "\"${schema}\".\"ETL_TEMP_${sfTable}\""
-    def stagingTable    = "\"${schema}\".\"ETL_RAW_${sfTable}\""
+    def stagingTable    = "\"${schema}\".\"ETL_JSON_${sfTable}\""
     def table           = "\"${schema}\".\"${sfTable}\""
     def idTable         = "\"${schema}\".\"ETL_IDS_${sfTable}\""
 
@@ -388,7 +390,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
             """,
 
             """
-                CREATE OR REPLACE TABLE $idTable (ETL_ID NUMBER);
+                CREATE OR REPLACE TABLE $idTable (ETL_ID STRING);
             """,
 
             """
@@ -419,7 +421,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
             """
                 CREATE TABLE IF NOT EXISTS $stagingTable
-                (ETL_ID NUMBER, ETL_WM NUMBER, JSON VARIANT, LAST_SYNC_TS NUMBER);
+                (ETL_ID STRING, ETL_WM NUMBER, JSON VARIANT, LAST_SYNC_TS NUMBER);
             """,
 
 

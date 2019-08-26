@@ -9,7 +9,7 @@ dbs {
             reynolds_deal
             reynolds_message
             sale_aftermarkets{
-                customId = "(CONCAT(reynolds_deal_id, "||", code))"
+                customId = '(CONCAT(reynolds_deal_id, "||", code))'
             }
             store
         }
