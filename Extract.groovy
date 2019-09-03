@@ -173,7 +173,7 @@ File[] extractToFiles(File scratchDir, sqlConn, database, table, fields, daysBac
 
 
     sqlConn?.execute("set transaction isolation level read uncommitted".toString())
-    def baseFileName = "${table}_"
+    def baseFileName = "v2_${table}_"
     def baseFileExt = ".json.gz"
     def files = []
 
@@ -201,7 +201,7 @@ File[] extractToFiles(File scratchDir, sqlConn, database, table, fields, daysBac
 
             (0..partCount - 1).eachParallel { part ->
 
-                def fileName = baseFileName + "${part}".padLeft(6, '0') + baseFileExt
+                def fileName = baseFileName + "${part}".padLeft(12, '0') + baseFileExt
                 def file = new File(scratchDir, fileName.toString())
 
                 def columns = fields.collect { it.Field }.join(',')
@@ -366,7 +366,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
 
     def schema          = CaseFormat.LOWER_CAMEL.to(CaseFormat.UPPER_UNDERSCORE, sourceDatabase)
-    def tempIngestTable = "\"${schema}\".\"ETL_TEMP_${sfTable}\""
+    def tempIngestTable = "\"${schema}\".\"_ETL_TEMP_${sfTable}\""
     def stagingTable    = "\"${schema}\".\"ETL_JSON_${sfTable}\""
     def table           = "\"${schema}\".\"${sfTable}\""
     def idTable         = "\"${schema}\".\"ETL_IDS_${sfTable}\""
@@ -408,7 +408,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
         sfIngestSql += [
 
             """
-                CREATE OR REPLACE TEMP TABLE $tempIngestTable (JSON VARIANT);
+                CREATE OR REPLACE TABLE $tempIngestTable (JSON VARIANT);
             """,
 
             """
@@ -432,7 +432,14 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
                     and stg."JSON":etl_wm = tgt.ETL_WM
                 WHEN NOT MATCHED THEN INSERT
                     (ETL_ID, ETL_WM, JSON, LAST_SYNC_TS) VALUES
-                    (stg."JSON":etl_id, stg."JSON":etl_wm, stg."JSON", stg."JSON":extractTs);
+                    (stg."JSON":etl_id, stg."JSON":etl_wm, stg."JSON", stg."JSON":extractTs)
+                    
+                WHEN MATCHED AND stg."JSON":etl_wm::number = 0 THEN UPDATE
+                SET 
+                    ETL_ID = stg."JSON":etl_id,
+                    ETL_WM = stg."JSON":etl_wm,
+                    JSON = stg."JSON",
+                    LAST_SYNC_TS = stg."JSON":extractTs;
             """,
 
             """
@@ -460,8 +467,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
             """,
 
             """
-                GRANT SELECT ON VIEW $table
-                TO ROLE PROCON_READ_ONLY;
+                GRANT SELECT ON VIEW $table TO ROLE PROCON_READ_ONLY;
             """,
 
             """
