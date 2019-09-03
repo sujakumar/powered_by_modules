@@ -12,6 +12,9 @@ dbs {
                 customId = '(CONCAT(reynolds_deal_id, "||", code))'
             }
             store
+            product_code_mapping {
+                customId = '(CONCAT(dealership, "||", external_code, "||", product_code))'
+            }
         }
         postSql = [
                 "CALL REYNOLDS.POST_PROCESS();"
