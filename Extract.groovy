@@ -75,10 +75,10 @@ extractConfig.dbs.each { db ->
                 extractTs = Instant.now().toEpochMilli()
                 if (watermark && daysBack >= 1) {
                     files = []
-                    files = extractToFiles(scratchDir, sqlConn, database, table, fields, daysBack, watermark, customId, extractTs, idealChunkingRecordCount, 32)
+                    files = extractToFiles(scratchDir, sqlConn, database, table, fields, daysBack, watermark, customId, extractTs, idealChunkingRecordCount, 8)
                 } else {
                     files = []
-                    files = extractToFiles(scratchDir, sqlConn, database, table, fields, null, null, customId, extractTs, idealChunkingRecordCount, 32)
+                    files = extractToFiles(scratchDir, sqlConn, database, table, fields, null, null, customId, extractTs, idealChunkingRecordCount, 8)
                 }
             }
 
@@ -427,7 +427,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
             """
                 MERGE INTO $stagingTable tgt
-                USING $tempIngestTable stg ON
+                USING (SELECT DISTINCT * FROM $tempIngestTable) stg ON
                     stg."JSON":etl_id = tgt.ETL_ID
                     and stg."JSON":etl_wm = tgt.ETL_WM
                 WHEN NOT MATCHED THEN INSERT

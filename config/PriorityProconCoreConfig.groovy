@@ -15,6 +15,7 @@ dbs {
 			account_link
 			account_user
 			account_preference
+			account_dealer
 			app_brand
 			app_system
 			app_system_brand
