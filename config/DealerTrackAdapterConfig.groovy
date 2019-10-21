@@ -13,7 +13,7 @@ dbs {
             }
             dt_deal
             dt_deal_fees {
-                customId = '(CONCAT(deal, "||", amo_fee_amount, "||", cost, "||", record_type))'
+                customId = '(SHA1(CONCAT(COALESCE(deal, \'-\'), "||", COALESCE(amo_fee_amount, \'-\'), "||", COALESCE(cost, \'-\'), "||", COALESCE(record_type, \'-\'), "||", COALESCE(description, \'-\'))))'
             }
             product_code_mapping {
                 customId = '(CONCAT(dealership, "||", external_code, "||", product_code))'
