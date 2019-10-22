@@ -37,6 +37,7 @@ dbs {
 			}
 			universe
 			landmark
+			landmark_group
 
 		}
 		postSql = [
