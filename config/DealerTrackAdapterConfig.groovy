@@ -7,7 +7,7 @@ dbs {
 
         // tables to extract
         tables {
-
+            dealership
             deal_status_mapping {
                 customId = '(CONCAT(dealership, "||", deal_status, "||", status_code))'
             }
