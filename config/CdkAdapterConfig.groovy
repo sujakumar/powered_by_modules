@@ -18,9 +18,7 @@ dbs {
             we_owe
 
 		}
-		postSql = [
-				"CALL CDK_ADAPTER.POST_PROCESS();"
-		]
+
 	}
 
 }

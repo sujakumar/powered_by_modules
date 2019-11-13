@@ -16,10 +16,6 @@ dbs {
                 customId = '(CONCAT(dealership, "||", external_code, "||", product_code))'
             }
         }
-        postSql = [
-                "CALL REYNOLDS.POST_PROCESS();"
-        ]
-
     }
 
 }

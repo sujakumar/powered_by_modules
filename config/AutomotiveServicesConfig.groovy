@@ -9,10 +9,6 @@ dbs {
             sale_item
 	    sale_order
         }
-	postSql = [
-		"CALL AUTOMOTIVE_SERVICES.POST_PROCESS();"
-	]
-
     }
 
 }

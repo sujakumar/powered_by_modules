@@ -10,10 +10,6 @@ dbs {
             shop_bert_line_item_attribute
             shop_bert_web_order
         }
-		postSql = [
-			"CALL SHOPBERT.POST_PROCESS();"
-		]
-
     }
 
 }

@@ -14,9 +14,7 @@ dbs {
             processing_record
 
         }
-	postSql = [
-		"CALL DMS_INTEGRATION.POST_PROCESS();"
-	]
+
     }
 
 }

@@ -10,9 +10,6 @@ dbs {
 			fuel_card_asset_association
 			location
         }
-		postSql = [
-			"CALL FCMS.POST_PROCESS();"
-		]
 
     }
 
