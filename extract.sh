@@ -1,6 +1,4 @@
 #!/bin/bash
-#export JAVA_OPTS="$JAVA_OPTS -Xms8G -Xmx8G"
-#export GROOVY_OPTS="$GROOVY_OPTS -Xms8G -Xmx8G"
 
 loop=0
 max_file_size=100000
@@ -12,10 +10,6 @@ sdir="$(dirname $(readlink -f $0))"
 current_groovy=groovy
 work_dir=$sdir/work
 mkdir $work_dir
-
-log_file=$sdir/log/PriorityProconCoreConfig.log
-extract_config_file=$sdir/config/PriorityProconCoreConfig.groovy
-conn_config_file=$sdir/Config.groovy
 
 usage()
 {
@@ -56,11 +50,21 @@ extract_cmd="$current_groovy $sdir/Extract.groovy $conn_config_file $extract_con
 while  
 	echo "running $extract_cmd"
 	savelog -n -l -c 100 $log_file
-	echo "$extract_cmd"	
+	echo "$extract_cmd"
+	echo "$extract_cmd" >> $log_file
+
+	echo "JAVA_OPTS: $JAVA_OPTS" >> $log_file
+	echo "GROOVY_OPTS: $GROOVY_OPTS" >> $log_file
+	date >> $log_file
+
 	$extract_cmd >> $log_file 2>&1
+	date >> $log_file
 	echo "sleeping $sleep_sec seconds"
+	echo "sleeping $sleep_sec seconds" >> $log_file
 	sleep $sleep_sec
 	echo "done sleeping"
+	echo "done sleeping" >> $log_file
+	date >> $log_file
 	[ "$loop" -eq "1" ]
 do true; done
 
