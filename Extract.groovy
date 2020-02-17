@@ -390,7 +390,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
             """,
 
             """
-                CREATE OR REPLACE TABLE $idTable (ETL_ID STRING);
+                CREATE OR REPLACE TRANSIENT TABLE $idTable (ETL_ID STRING);
             """,
 
             """
@@ -408,7 +408,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
         sfIngestSql += [
 
             """
-                CREATE OR REPLACE TABLE $tempIngestTable (JSON VARIANT);
+                CREATE OR REPLACE TEMPORARY TABLE $tempIngestTable (JSON VARIANT);
             """,
 
             """
@@ -453,7 +453,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
     sfIngestSql += [
             """
-                CREATE OR REPLACE TABLE $table
+                CREATE OR REPLACE TEMPORARY TABLE $table
                 COPY GRANTS
                 AS SELECT $CTAS_CRITERIA
                 FROM (
