@@ -453,7 +453,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
     sfIngestSql += [
             """
-                CREATE OR REPLACE TEMPORARY TABLE $table
+                CREATE OR REPLACE TRANSIENT TABLE $table
                 COPY GRANTS
                 AS SELECT $CTAS_CRITERIA
                 FROM (
