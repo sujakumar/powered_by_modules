@@ -34,6 +34,14 @@ dmsIntegrationDb {
     url         = 'jdbc:mysql://amesnapshot01.i.spireon.com/dmsIntegration_production?zeroDateTimeBehavior=convertToNull&connectTimeout=30000&socketTimeout=60000&autoReconnect=true&allowMultiQueries=true'
 }
 
+
+atiIntelliscan {
+    username    = ''''''
+    password    = ''''''
+    url         = 'jdbc:mysql://??ati_intelliscan'
+}
+
+
 snowflakeDb {
     username    = "$sf_username"
     password    = '''$some_sf_pwd'''
@@ -43,6 +51,7 @@ snowflakeDb {
     url         = "jdbc:snowflake://spireon.snowflakecomputing.com:443/?ssl=on&account=spireon"
     stage       = "S3_LAKESPIREON_PROD"
 }
+
 
 
 // where to store the extracted db files

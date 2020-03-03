@@ -50,7 +50,13 @@ extractConfig.dbs.each { db ->
 
     db.value.tables.each { t ->
 
-        def sqlConn = Sql.newInstance(config."$dbConfigKey".url, config."$dbConfigKey".username, config."$dbConfigKey".password, 'com.mysql.jdbc.Driver')
+        def dbUrl   = config."$dbConfigKey".url
+        def dbUser  = config."$dbConfigKey".username
+        def dbPwd   = config."$dbConfigKey".password
+
+        println "   connecting to '${dbUser}:${dbPwd != null}@${dbUrl}'"
+
+        def sqlConn = Sql.newInstance(dbUrl, dbUser, dbPwd, 'com.mysql.jdbc.Driver')
         def database = db.key
         def table = t.key
 
@@ -125,6 +131,8 @@ extractConfig.dbs.each { db ->
         } catch(e) {
             println(e)
             println("Failed to extract '${database}.${table}'. Moving on to next table")
+        } finally {
+            sqlConn.close()
         }
 
     }
