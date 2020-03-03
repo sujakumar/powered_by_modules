@@ -407,6 +407,12 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
                 FILES = ('${extractedIdsFile.name}')
                 PURGE = TRUE;
             """,
+
+            """
+                CREATE TABLE IF NOT EXISTS $stagingTable
+                (ETL_ID STRING, ETL_WM NUMBER, JSON VARIANT, LAST_SYNC_TS NUMBER);
+            """,
+
     ]
 
     if (files){
@@ -426,12 +432,6 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
                 FILE_FORMAT = (TYPE = 'JSON' STRIP_NULL_VALUES = TRUE)
                 PURGE = TRUE;
             """,
-
-            """
-                CREATE TABLE IF NOT EXISTS $stagingTable
-                (ETL_ID STRING, ETL_WM NUMBER, JSON VARIANT, LAST_SYNC_TS NUMBER);
-            """,
-
 
             """
                 MERGE INTO $stagingTable tgt

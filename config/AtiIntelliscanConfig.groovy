@@ -15,6 +15,8 @@ dbs {
             image_metadata
             image_request
             sensor_info
+            image_credit_limit
+            image_credit_limit_history
         }
     }
 
