@@ -8,8 +8,6 @@ extract_plan=-1
 
 sdir="$(dirname $(readlink -f $0))"
 current_groovy=groovy
-work_dir=$sdir/work
-mkdir $work_dir
 
 usage()
 {
@@ -41,13 +39,16 @@ while [ "$1" != "" ]; do
     shift
 done
 
+work_dir=$sdir/work/$extract_plan
+mkdir $work_dir
+
 log_file=$sdir/log/$extract_plan.log
 extract_config_file=$sdir/config/${extract_plan}Config.groovy
 conn_config_file=$sdir/Config.groovy
 
-extract_cmd="$current_groovy $sdir/Extract.groovy $conn_config_file $extract_config_file $work_dir $days_back $max_file_size" 
+extract_cmd="$current_groovy $sdir/Extract.groovy $conn_config_file $extract_config_file $work_dir $days_back $max_file_size"
 
-while  
+while
 	echo "running $extract_cmd"
 	savelog -n -l -c 100 $log_file
 	echo "$extract_cmd"
