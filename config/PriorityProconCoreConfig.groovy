@@ -22,6 +22,7 @@ dbs {
 			app_system_app_brand {
 				customId = "((app_system_brands_id * 10000000) + (app_brand_id))"
 			}
+			app_brand_map
 			asset
 			asset_group
 			asset_operator
