@@ -29,6 +29,7 @@ dbs {
 			device
 			device_link
 			device_network
+			device_transfer
 			user
 			user_preference
 			invitation
