@@ -7,7 +7,8 @@ dbs {
         tables {
             sale
             sale_item
-	    sale_order
+	        sale_order
+            vehicle_transfer
         }
     }
 
