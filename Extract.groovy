@@ -497,17 +497,10 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
             """
     ]
 
-
-//    if (sourceDatabase.toLowerCase().startsWith("proconcore") || sourceDatabase.toLowerCase().startsWith("shopbert") || sourceDatabase.toLowerCase().startsWith("automotiveServices")){
-//        def targetEntity = "\"$sfDatabase\".\"NSPIRE\".\"$sfTable\""
-//        // sfIngestSql << """ DROP TABLE IF EXISTS $targetEntity"""
-//        sfIngestSql << """ CREATE OR REPLACE VIEW $targetEntity COPY GRANTS AS SELECT JSON, LAST_SYNC_TS FROM $sfDbSchemaTableRaw """
-//    }
-
-
     try {
         // run sql instructions
         Sql.newInstance(sfUrl, sfUsername, sfPassword, 'com.snowflake.client.jdbc.SnowflakeDriver').with { sfsql ->
+            sfsql.execute("""ALTER SESSION SET QUERY_TAG = 'Extract ${sourceDatabase} to ${sfDatabase}.${schema}';""".toString())
             sfIngestSql.each {
                 println it
                 sfsql.execute(it.toString())
@@ -541,6 +534,7 @@ def postProcessing(sfUrl, sfUsername, sfPassword, sfDb, statements){
         statements.add(0, "USE DATABASE $sfDb;")
         println("Staring post processing...")
         Sql.newInstance(sfUrl, sfUsername, sfPassword, 'com.snowflake.client.jdbc.SnowflakeDriver').with { sfsql ->
+            sfsql.execute("""ALTER SESSION SET QUERY_TAG = 'Extract MySql to ${sfDb} postProcessing';""".toString())
             statements.each { stmt ->
                 println "\t$stmt"
                 sfsql.execute(stmt.toString())
@@ -558,7 +552,7 @@ def preProcessing(sfUrl, sfUsername, sfPassword, sfDb, statements){
         statements.add(0, "USE DATABASE $sfDb;")
         println("Staring pre processing...")
         Sql.newInstance(sfUrl, sfUsername, sfPassword, 'com.snowflake.client.jdbc.SnowflakeDriver').with { sfsql ->
-
+            sfsql.execute("""ALTER SESSION SET QUERY_TAG = 'Extract MySql to ${sfDb} preProcessing';""".toString())
             statements.each { stmt ->
                 println "\t$stmt"
                 sfsql.execute(stmt.toString())
