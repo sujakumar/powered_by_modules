@@ -1,5 +1,5 @@
-@Grab('com.amazonaws:aws-java-sdk:1.11.511')
-@Grab('net.snowflake:snowflake-jdbc:3.6.27')
+@Grab('com.amazonaws:aws-java-sdk:1.11.764')
+@Grab('net.snowflake:snowflake-jdbc:3.12.3')
 @Grab('mysql:mysql-connector-java:5.1.47')
 @Grab('org.codehaus.gpars:gpars:1.2.1')
 @Grab('com.google.guava:guava:27.0.1-jre')
