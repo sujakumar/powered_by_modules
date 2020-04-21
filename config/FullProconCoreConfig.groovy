@@ -1,5 +1,3 @@
-concurrentExtracts = 1
-daysBack = -1
 
 dbs {
 
@@ -10,6 +8,7 @@ dbs {
 
         // tables to extract
         tables {
+            app_feature_set
             data_service_map
             device_battery_type
             asset_attribute
