@@ -16,6 +16,7 @@ import java.util.zip.GZIPOutputStream
 import com.amazonaws.services.s3.AmazonS3Client
 import com.google.common.base.CaseFormat
 
+TimeZone.setDefault(TimeZone.getTimeZone('UTC'))
 
 //def idealChunkingRecordCount = 100000
 
