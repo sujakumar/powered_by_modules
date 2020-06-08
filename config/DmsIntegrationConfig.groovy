@@ -12,7 +12,7 @@ dbs {
             deal_item
             deal_validation_error
             processing_record
-
+            inventory_record
         }
 
     }
