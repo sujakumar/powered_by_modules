@@ -28,6 +28,7 @@ dbs {
 			asset_operator
 			device
 			device_link
+			device_link_conf
 			device_network
 			device_transfer
 			user
