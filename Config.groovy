@@ -35,12 +35,17 @@ dmsIntegrationDb {
 }
 
 
-atiIntelliscan {
+atiIntelliscanDb {
     username    = ''''''
     password    = ''''''
     url         = 'jdbc:mysql://??ati_intelliscan'
 }
 
+homenetAdapterDb {
+    username    = ''''''
+    password    = ''''''
+    url         = 'jdbc:mysql://??HomenetAdapter'
+}
 
 snowflakeDb {
     username    = "$sf_username"
