@@ -47,6 +47,12 @@ homenetAdapterDb {
     url         = 'jdbc:mysql://??HomenetAdapter'
 }
 
+sysdevx103proconfleetDb {
+    username    = ''
+    password    = ''''''
+    url         = 'jdbc:mysql://???/103_proconfleet?zeroDateTimeBehavior=convertToNull&connectTimeout=300000&socketTimeout=600000&autoReconnect=true&allowMultiQueries=true'
+}
+
 snowflakeDb {
     username    = "$sf_username"
     password    = '''$some_sf_pwd'''
