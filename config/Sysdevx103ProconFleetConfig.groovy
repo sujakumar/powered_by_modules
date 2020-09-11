@@ -5,11 +5,7 @@ dbs {
             brands
             plans
             plan_prices
-
             rma_master
-            users
-            rma_status
-            devices
             rma_fault
             order_serials
             order_details
