@@ -306,6 +306,15 @@ def sfMappings(field){
     } else if (field.Type.toLowerCase().startsWith('bigint')){
         field.sfType = 'NUMBER'
         field.sfExtract = "JSON:${field.Field}::NUMBER as ${field.Field}"
+    } else if (field.Type.toLowerCase().startsWith('tinyint')){
+        field.sfType = 'NUMBER'
+        field.sfExtract = "JSON:${field.Field}::NUMBER as ${field.Field}"
+    } else if (field.Type.toLowerCase().startsWith('smallint')){
+        field.sfType = 'NUMBER'
+        field.sfExtract = "JSON:${field.Field}::NUMBER as ${field.Field}"
+    } else if (field.Type.toLowerCase().startsWith('mediumint')){
+        field.sfType = 'NUMBER'
+        field.sfExtract = "JSON:${field.Field}::NUMBER as ${field.Field}"
     } else if (field.Type.toLowerCase().startsWith('int')){
         field.sfType = 'NUMBER'
         field.sfExtract = "JSON:${field.Field}::NUMBER as ${field.Field}"
@@ -322,6 +331,9 @@ def sfMappings(field){
         field.sfType = 'DATETIME'
         field.sfExtract = "TO_TIMESTAMP(AS_VARCHAR(JSON:${field.Field}), 'YYYY-MM-DDTHH24:MI:SSTZHTZM') as ${field.Field}"
     } else if (field.Type.toLowerCase().startsWith('timestamp')){
+        field.sfType = 'DATETIME'
+        field.sfExtract = "TO_TIMESTAMP(AS_VARCHAR(JSON:${field.Field}), 'YYYY-MM-DDTHH24:MI:SSTZHTZM') as ${field.Field}"
+    } else if (field.Type.toLowerCase().startsWith('date')){
         field.sfType = 'DATETIME'
         field.sfExtract = "TO_TIMESTAMP(AS_VARCHAR(JSON:${field.Field}), 'YYYY-MM-DDTHH24:MI:SSTZHTZM') as ${field.Field}"
     } else if (field.Type.toLowerCase().startsWith('longtext')){
