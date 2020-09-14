@@ -1,5 +1,7 @@
 dbs {
     sysdevx103proconfleet {
+
+        excludedColumns = ['password', 'pwd', 'foo', 'pin']
         tables {
             user_types
             brands
@@ -7,6 +9,7 @@ dbs {
             plan_prices
             rma_master
             rma_fault
+            rma_status
             order_serials
             order_details
             orders

@@ -28,7 +28,7 @@ def scratchDir = new File(args[2])
 def daysBack = args[3] as Integer // -1 is full extract
 def idealChunkingRecordCount = args[4]  as Integer
 
-def globallyExcludedColumns = ['password','pwd'] as Set
+def globallyExcludedColumns = ['password','pwd','pin'] as Set
 globallyExcludedColumns = extractConfig.db.excludedColumns ? extractConfig.db.excludedColumns + globallyExcludedColumns as Set : globallyExcludedColumns
 
 def concurrentExtracts = extractConfig.concurrentExtracts ?: 1

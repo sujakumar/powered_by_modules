@@ -1,5 +1,8 @@
 dbs {
     sysdevx103proconfleet {
+
+        excludedColumns = ['password', 'pwd', 'foo', 'pin']
+
         tables {
 
             users {

@@ -50,7 +50,7 @@ homenetAdapterDb {
 sysdevx103proconfleetDb {
     username    = ''
     password    = ''''''
-    url         = 'jdbc:mysql://???/103_proconfleet?zeroDateTimeBehavior=convertToNull&connectTimeout=300000&socketTimeout=600000&autoReconnect=true&allowMultiQueries=true'
+    url         = 'jdbc:mysql://???/103_proconfleet?zeroDateTimeBehavior=convertToNull&connectTimeout=300000&socketTimeout=600000&autoReconnect=true&allowMultiQueries=true&tinyInt1isBit=false'
 }
 
 snowflakeDb {
