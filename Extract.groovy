@@ -394,7 +394,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
 
     def statsTable      = "\"${schema}\".ETL_STATS"
 
-    def CTAS_CRITERIA = fields.collect { it.sfExtract }.join(', ') + ", ETL_ID, ETL_WM "
+    def CTAS_CRITERIA = fields.collect { it.sfExtract }.join(', ') + ", ETL_ID, ETL_WM, LAST_SYNC_TS "
 
     // backwards compatibility
     def legacySchema    = "\"TEMP_${sourceDatabase}\""
@@ -480,7 +480,7 @@ def ingestIntoSnowflake(sfUrl, sfUsername, sfPassword, sfStage, sfDatabase, sfSc
                 FROM (
                     SELECT
                         ETL_ID, ETL_WM, JSON, LAST_SYNC_TS,
-                         ROW_NUMBER() OVER (PARTITION BY ETL_ID ORDER BY ETL_WM DESC) AS row_num
+                         ROW_NUMBER() OVER (PARTITION BY ETL_ID ORDER BY LAST_SYNC_TS DESC, ETL_WM DESC) AS row_num
                     FROM $stagingTable
                     WHERE ETL_ID IN (SELECT ETL_ID FROM $idTable)
                 ) WHERE row_num = 1;
