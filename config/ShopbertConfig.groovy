@@ -10,6 +10,8 @@ dbs {
             shop_bert_line_item_attribute
             shop_bert_web_order
             shop_bert_reference_type
+            shop_bert_product
+            shop_bert_product_type_meta_data
         }
     }
 
