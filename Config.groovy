@@ -63,6 +63,24 @@ snowflakeDb {
     stage       = "S3_LAKESPIREON_PROD"
 }
 
+automotiveServicesDb {
+    username    = '$extract_username'
+    password    = '''$some_pwd'''
+    url         = 'jdbc:mysql://amesnapshot01.i.spireon.com/automotiveServices_production?zeroDateTimeBehavior=convertToNull&connectTimeout=30000&socketTimeout=60000&autoReconnect=true&allowMultiQueries=true'
+}
+
+enterpriseIntegrationDb {
+    username    = '$extract_username'
+    password    = '''$some_pwd'''
+    url         = 'jdbc:mysql://amesnapshot01.i.spireon.com/enterpriseIntegration_production?zeroDateTimeBehavior=convertToNull&connectTimeout=30000&socketTimeout=60000&autoReconnect=true&allowMultiQueries=true'
+}
+
+installationServicesDb {
+    username    = '$extract_username'
+    password    = '''$some_pwd'''
+    url         = 'jdbc:mysql://amesnapshot01.i.spireon.com/installationServices_production?zeroDateTimeBehavior=convertToNull&connectTimeout=30000&socketTimeout=60000&autoReconnect=true&allowMultiQueries=true'
+}
+
 
 
 // where to store the extracted db files
