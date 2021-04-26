@@ -8,7 +8,9 @@ dbs {
         // tables to extract
         tables {
             installation
-
+            installation_attributes{
+              customId='(CONCAT(installation_id ,"||", attribute_type))'
+           }
         }
 
     }
